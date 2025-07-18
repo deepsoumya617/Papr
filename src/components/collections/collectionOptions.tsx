@@ -49,6 +49,7 @@ const CollectionOptions = ({
           collectionId={collection.id}
           title={collection.name}
           colors={collection.colors}
+          onEdit={fetchCollections}
         >
           <DropdownMenuItem
             onSelect={(e) => e.preventDefault()}

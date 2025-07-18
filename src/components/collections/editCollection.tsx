@@ -33,6 +33,7 @@ interface EditCollectionProps {
   colors: string | null;
   collectionId: string;
   children: ReactNode;
+  onEdit?: () => void;
 }
 
 const EditCollection = (props: EditCollectionProps) => {
@@ -55,8 +56,9 @@ const EditCollection = (props: EditCollectionProps) => {
       setIsOpen(false);
       setLoading(false);
       toast.success("Collection edited successfully");
+      props.onEdit?.();
     } catch (error) {
-      console.error("⚠️ editCollection - Error editing collection:", error);
+      console.error("editCollection - Error editing collection:", error);
       toast.error("Failed to edit collection.", {
         description: "Please try again later.",
       });
