@@ -15,9 +15,14 @@ import ReminderItem from "../reminders/reminderItem";
 interface ShowCollectionProps {
   collection: GetCollections;
   reminders: GetReminders[];
+  fetchCollections: () => Promise<void>;
 }
 
-const ShowCollection = ({ collection, reminders }: ShowCollectionProps) => {
+const ShowCollection = ({
+  collection,
+  reminders,
+  fetchCollections,
+}: ShowCollectionProps) => {
   return (
     <Accordion
       type="single"
@@ -48,7 +53,10 @@ const ShowCollection = ({ collection, reminders }: ShowCollectionProps) => {
               collectionName={collection.name || ""}
               collectionColor={collection.colors}
             />
-            <CollectionOptions collection={collection} />
+            <CollectionOptions
+              collection={collection}
+              fetchCollections={fetchCollections}
+            />
           </div>
         </div>
 

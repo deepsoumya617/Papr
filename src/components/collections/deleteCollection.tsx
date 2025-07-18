@@ -18,6 +18,7 @@ interface DeleteCollectionProps {
   title: string;
   collectionId: string;
   children: ReactNode;
+  onDelete?: () => void;
 }
 
 const DeleteCollection = (props: DeleteCollectionProps) => {
@@ -31,7 +32,7 @@ const DeleteCollection = (props: DeleteCollectionProps) => {
         queryKey: ["organizations"],
       });
       setIsOpen(false);
-      redirect("/app");
+      props.onDelete?.();
     } catch (error) {
       console.error("Error updating organization:", error);
     }

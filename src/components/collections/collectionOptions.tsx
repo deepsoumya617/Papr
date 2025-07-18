@@ -17,9 +17,13 @@ import { cn } from "@/lib/utils";
 
 interface CollectionOptionsProps {
   collection: GetCollections;
+  fetchCollections: () => Promise<void>;
 }
 
-const CollectionOptions = ({ collection }: CollectionOptionsProps) => {
+const CollectionOptions = ({
+  collection,
+  fetchCollections,
+}: CollectionOptionsProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -33,7 +37,11 @@ const CollectionOptions = ({ collection }: CollectionOptionsProps) => {
           "h-7 cursor-pointer",
         )}
       >
-        {isOpen ? <XIcon className="h-4 w-4" /> : <EllipsisIcon className="h-4 w-4" />}
+        {isOpen ? (
+          <XIcon className="h-4 w-4" />
+        ) : (
+          <EllipsisIcon className="h-4 w-4" />
+        )}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
@@ -51,7 +59,11 @@ const CollectionOptions = ({ collection }: CollectionOptionsProps) => {
           </DropdownMenuItem>
         </EditCollection>
         <DropdownMenuSeparator />
-        <DeleteCollection collectionId={collection.id} title={collection.name}>
+        <DeleteCollection
+          collectionId={collection.id}
+          title={collection.name}
+          onDelete={fetchCollections}
+        >
           <DropdownMenuItem
             onSelect={(e) => e.preventDefault()}
             className="cursor-pointer"

@@ -33,7 +33,7 @@ import { toast } from "sonner";
 interface CreateCollectionProps {
   children: ReactNode;
   organizationId?: string;
-  onCreate?: () => void; // ✅ Added
+  onCreate?: () => void;
 }
 
 const CreateCollection = ({
@@ -57,12 +57,12 @@ const CreateCollection = ({
       });
 
       toast.success("Collection created successfully");
-      onCreate?.(); // ✅ Call parent-provided callback
-
       form.reset();
       setIsOpen(false);
+
+      onCreate?.();
     } catch (error) {
-      console.error("⚠️ Error creating collection:", error);
+      console.error("Error creating collection:", error);
       toast.error("Failed to create collection.", {
         description: "Please try again later.",
       });
